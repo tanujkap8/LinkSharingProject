@@ -1,9 +1,6 @@
 package com.entities;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.util.Date;
 
 /**
@@ -13,25 +10,51 @@ import java.util.Date;
 public class Subscription {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private int subid;
-    private String Topic;
-    private enum Seriousness{Serious,VerySerious,Casual};
+    private int subcriptionId;
+
+   public enum Seriousness {
+        Serious("Serious"), VerySerious("VerySerious"), Casual("Casual");
+        String value;
+
+        Seriousness(String value) {
+            this.value = value;
+        }
+
+        public String getValue() {
+            return value;
+        }
+
+        public void setValue(String value) {
+            this.value = value;
+        }
+    }
+
+    public Seriousness getSeriousness() {
+        return seriousness;
+    }
+
+    public void setSeriousness(Seriousness seriousness) {
+        this.seriousness = seriousness;
+    }
+
+    @Enumerated(EnumType.STRING)
+    Seriousness seriousness = Seriousness.VerySerious;
+    @Column
+    @Temporal(TemporalType.TIMESTAMP)
     private Date dateCreated;
 
-    public int getSubid() {
-        return subid;
+    @ManyToOne
+    private Topic topic;
+
+    @ManyToOne
+    private User user;
+
+    public int getSubcriptionId() {
+        return subcriptionId;
     }
 
-    public void setSubid(int subid) {
-        this.subid = subid;
-    }
-
-    public String getTopic() {
-        return Topic;
-    }
-
-    public void setTopic(String topic) {
-        Topic = topic;
+    public void setSubcriptionId(int subcriptionId) {
+        this.subcriptionId = subcriptionId;
     }
 
     public Date getDateCreated() {
@@ -40,5 +63,21 @@ public class Subscription {
 
     public void setDateCreated(Date dateCreated) {
         this.dateCreated = dateCreated;
+    }
+
+    public Topic getTopic() {
+        return topic;
+    }
+
+    public void setTopic(Topic topic) {
+        this.topic = topic;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
     }
 }

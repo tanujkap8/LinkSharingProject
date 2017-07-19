@@ -34,53 +34,61 @@ public class ViewController {
     }
 
     @RequestMapping(value = "/register", method = RequestMethod.POST)
-    public @ResponseBody
-    ModelAndView getsave(@ModelAttribute User user, BindingResult bindingResult,@RequestParam("photo") MultipartFile[] fileUpload,HttpServletRequest request) throws IOException {
+    public @ResponseBody ModelAndView getsave(@RequestParam("photo") MultipartFile fileUpload, @ModelAttribute User user, BindingResult bindingResult, HttpServletRequest request) throws IOException {
 
         HttpSession session = request.getSession();
 
-        if (fileUpload != null && fileUpload.length > 0) {
-            for (MultipartFile aFile : fileUpload){
-                System.out.println("Saving file: " + aFile.getOriginalFilename());
-                user.setPhoto(aFile.getBytes());
+        if (fileUpload != null) {
+            if (fileUpload.getSize() > 0)
+
+            {
+                user.setPhoto(fileUpload.getBytes());
+            } else {
+                File file = new File("/home/tanuj/IdeasProjects/LinkSharing/src/main/webapp/WEB-INF/assets/images/dp.jpg");
+                FileInputStream fis = new FileInputStream(file);
+                byte b[] = new byte[(int) file.length()];
+                fis.read(b);
+                user.setPhoto(b);
             }
-            System.out.println("length "+ fileUpload.length);
         }
-        else {
-            File file=new File("${pageContext.request.contextPath}/resources/assets/images/dp.jpg");
-            FileInputStream fis=new FileInputStream(file);
-            byte b[]=new byte[(int)file.length()];
-            fis.read(b);
-            user.setPhoto(b);
+            ModelAndView model = new ModelAndView();
+            registerService.save(user);
+            session.setAttribute("Userdetails", user);
+            model.setViewName("UserHome");
+            return model;
         }
-        ModelAndView model = new ModelAndView();
-        registerService.save(user);
-        session.setAttribute("Userdetails", user);
-        model.setViewName("UserHome");
-        return model;
-    }
 
-    @RequestMapping(value = "/login", method = RequestMethod.POST)
-    public @ResponseBody
-    ModelAndView getlogin(@RequestParam("username") String username, @RequestParam("password") String password, HttpServletRequest request) throws Exception {
-        user = loginService.getUserByUsernameAndPassword(username,password);
+        @RequestMapping(value = "/login", method = RequestMethod.POST)
+        public @ResponseBody
+        ModelAndView getlogin (@RequestParam("username") String username, @RequestParam("password") String
+        password, HttpServletRequest request) throws Exception {
 
-        if (username.equals(user.getUsername())) {
-            modelAndView = new ModelAndView();
-            modelAndView.setViewName("UserHome");
+            HttpSession session = request.getSession();
+            user = loginService.getUserByUsernameAndPassword(username, password);
 
+            if (username.equals(user.getUsername())) {
+                session.setAttribute("Userdetails", user);
+                modelAndView = new ModelAndView();
+                modelAndView.setViewName("UserHome");
+
+            }
+            return modelAndView;
         }
-        return modelAndView;
-    }
 
 
-    @RequestMapping(value = "/getPhoto")
-    public void getPhoto(HttpServletRequest request, HttpServletResponse response) throws IOException {
-        HttpSession session = request.getSession();
-        user = (User) session.getAttribute("Userdetails");
-        System.out.println("in get photo user is " + user);
-        byte[] arr = user.getPhoto();
-        response.getOutputStream().write(arr);
+        @RequestMapping(value = "/getPhoto")
+        public void getPhoto (HttpServletRequest request, HttpServletResponse response) throws IOException {
+            HttpSession session = request.getSession();
+            user = (User) session.getAttribute("Userdetails");
+            System.out.println("in get photo user is " + user);
+            byte[] arr = user.getPhoto();
+            response.getOutputStream().write(arr);
+        }
+
+        @RequestMapping(value = "/userprofile", method = RequestMethod.GET)
+        public ModelAndView getprofilepage () {
+            ModelAndView view = new ModelAndView("Profile");
+            return view;
+        }
     }
-}
 

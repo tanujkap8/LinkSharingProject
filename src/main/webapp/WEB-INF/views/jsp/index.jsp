@@ -12,49 +12,14 @@
   <title>Link-Share</title>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="shortcut icon" href="${pageContext.request.contextPath}resources/assets/images/icon.ico" />
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
   <link rel="stylesheet" href="${pageContext.request.contextPath}resources/assets/css/st.css" >
-  <script href="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
   <script src="https://cdn.jsdelivr.net/jquery.validation/1.15.1/jquery.validate.min.js"></script>
-  <script href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-  <script type="text/javascript">
-      $().ready(function () {
-          $("#validateform").validate({
-              rules: {
-                  email: {
-                      required: true,
-                      email: true
-                  },
-                  userName: {
-                      required: true,
-                      minlenght: 3,
-                      maxlength: 15
-                  },
-                  password: {
-                      required: true,
-                      minlength: 5
-                  },
-                  confirmpassword: {
-                      required: true,
-                      equalTo: "#password"
-                  }
-
-              },
-              messages: {
-                  userName: {
-                      require: "Dont Forget your Username",
-                      minlength: "You minlength is not right",
-// maxlength:$.validator.format("You have exceeded the maxlength {0}")
-                  },
-                  confirmpassword: {
-                      require: "You Forgot to confirm your password",
-                      equalTo: "Password Not match"
-                  }
-              }
-          });
-      });
-  </script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
 </head>
 <body style="background-image: url('${pageContext.request.contextPath}/resources/assets/images/bg.jpeg')">
 <div class="container">

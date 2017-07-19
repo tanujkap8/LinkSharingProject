@@ -11,7 +11,7 @@
                 <input type="password" required="required" name="password" class="form-control" id="pwd" placeholder="Enter password">
             </div>
             <div class="checkbox">
-                <a href="forgetpassword.jsp">Forgot password</a>
+                <a href="/forgetpass">Forgot password</a>
                 <button type="submit" class="btn btn-primary" style="float:right">Submit</button>
             </div>
         </form>

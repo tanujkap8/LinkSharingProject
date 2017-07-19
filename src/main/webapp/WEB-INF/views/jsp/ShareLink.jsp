@@ -3,6 +3,9 @@
 <head>
     <style>
         /* The Modal (background) */
+        .ui-front{
+            z-index: 10000;
+        }
         .modal {
             display: none; /* Hidden by default */
             position: fixed; /* Stay in place */
@@ -27,15 +30,15 @@
         }
 
         /* The Close Button */
-        .close {
+        .close2 {
             color: #aaaaaa;
             float: right;
             font-size: 28px;
             font-weight: bold;
         }
 
-        .close:hover,
-        .close:focus {
+        .close2:hover,
+        .close2:focus {
             color: #000;
             text-decoration: none;
             cursor: pointer;
@@ -43,27 +46,30 @@
     </style>
 </head>
 <body>
-<button  class="btn btn-primary" id="myBtn"><span class="glyphicon glyphicon-comment"></span></button>
-<div id="myModal" class="modal">
-    <div class="modal-content">
-        <span class="close">&times;</span>
-        <h2>Add Topic</h2>
-        <form action="/addtopic" method="post">
+<button  class="btn btn-primary" id="myBtn2"><span class="glyphicon glyphicon-link"></span></button>
+<div id="myModal2" class="modal ui-front">
+    <div class="modal-content" style="background: lightgray">
+        <span class="close2">&times;</span>
+        <h2>Share Link</h2>
+        <form action="" method="post">
             <div class="form-group">
-                <label for="topicname">Name*</label>
+                <label for="topicname">Link*</label>
                 <input type="text" class="form-control" id="topicname" name="topicname" placeholder="TOPIC NAME">
             </div>
             <div class="form-group">
-                <label for="visibility">Visibility*</label>
-                <select style="float:left" id="visibility" class="form-control">
-                    <option class="form-control" value="private">PRIVATE</option>
-                    <option class="form-control" value="public">PUBLIC</option>
+                <label for="description">Description*</label>
+                <textarea rows="4" cols="50" class="form-control" name="description" id="description">Description</textarea>
+            </div>
+            <div class="form-group">
+                <label for="topic">Topic*</label>
+                <select style="float:left" id="topic" class="form-control">
+                    <option class="form-control"></option>
                 </select>
             </div>
             <div class="modal-footer">
                 <div class="checkbox">
                     <button type="submit" class="btn btn-primary" style="float:right ">Cancel</button>
-                    <button type="submit" class="btn btn-primary" style="float:right ;margin-right:40px">Save</button>
+                    <button type="submit" class="btn btn-primary" style="float:right ;margin-right:40px">Share</button>
                 </div>
             </div>
         </form>
@@ -72,28 +78,28 @@
 
 <script>
     // Get the modal
-    var modal = document.getElementById('myModal');
+    var modal2 = document.getElementById('myModal2');
 
     // Get the button that opens the modal
-    var btn = document.getElementById("myBtn");
+    var btn2 = document.getElementById("myBtn2");
 
     // Get the <span> element that closes the modal
-    var span = document.getElementsByClassName("close")[0];
+    var span = document.getElementsByClassName("close2")[0];
 
     // When the user clicks the button, open the modal
-    btn.onclick = function() {
-        modal.style.display = "block";
+    btn2.onclick = function() {
+        modal2.style.display = "block";
     }
 
     // When the user clicks on <span> (x), close the modal
     span.onclick = function() {
-        modal.style.display = "none";
+        modal2.style.display = "none";
     }
 
     // When the user clicks anywhere outside of the modal, close it
     window.onclick = function(event) {
         if (event.target == modal) {
-            modal.style.display = "none";
+            modal2.style.display = "none";
         }
     }
 </script>

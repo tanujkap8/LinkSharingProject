@@ -15,6 +15,7 @@ public class User {
     private int userid;
     private String firstname;
     private String lastname;
+    @Column(unique = true)
     private String username;
     private String email;
     private String password;

@@ -53,5 +53,40 @@ public class UserDaoImpl implements UserDao {
         return user;
 
     }
+
+    @Override
+    public User findByID(Integer id) {
+        return null;
+    }
+
+    @Override
+    public User findByEmail(String email) {
+        Session session = sessionFactory.openSession();
+        Query query= session.createQuery("from User where email=:email");
+        //System.out.println(query);
+        query.setParameter("email", email);
+        User user = (User) query.uniqueResult();
+        session.close();
+        return user;
+    }
+
+    @Override
+    public boolean updatePassword(String email, String password) {
+        Session session = sessionFactory.openSession();
+        session.beginTransaction();
+        Query query= session.createQuery("update User set password=:password where email=:email");
+        //System.out.println("update pass"+ query);
+        query.setParameter("password", password);
+        query.setParameter("email", email);
+        query.executeUpdate();
+        //System.out.println("working 1");
+
+        query = session.createQuery("delete from OTPMapping where email=:email");
+        query.setParameter("email",email);
+        query.executeUpdate();
+        session.getTransaction().commit();
+        //System.out.println("working 2");
+        return true;
+    }
 }
 

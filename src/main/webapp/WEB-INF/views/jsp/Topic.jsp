@@ -41,14 +41,38 @@
             cursor: pointer;
         }
     </style>
+    <script type="text/javascript">
+        $(document).ready(function() {
+            $("#topicadd").validate({
+                rules: {
+                    name: {
+                        required: true,
+                        remote: '/validatetopic'
+                    },
+                    visibility:{
+                        required:true
+                    }
+                },
+                messages:{
+                    name:{
+                        required: "Dont Forget Topic name Dude !!",
+                        remote:"Sorry , Topic already exist !!"
+                    },
+                    visibility:{
+                        required:"Dont Forget the Visibility"
+                    }
+                }
+            });
+        });
+    </script>
 </head>
 <body>
 <button  class="btn btn-primary" id="myBtn"><span class="glyphicon glyphicon-comment"></span></button>
-<div id="myModal" class="modal">
-    <div class="modal-content">
+<div id="myModal" class="modal" >
+    <div class="modal-content" style="background: lightgray">
         <span class="close">&times;</span>
         <h2>Add Topic</h2>
-        <form action="addtopic" method="post">
+        <form action="addtopic" method="post" id="topicadd">
         <div class="form-group">
             <label for="name">Name*</label>
             <input type="text" class="form-control" id="name" name="name" placeholder="TOPIC NAME">
@@ -56,8 +80,8 @@
             <div class="form-group">
                 <label for="visibility">Visibility*</label>
                 <select style="float:left" id="visibility" name="visibility" class="form-control">
-                    <option class="form-control" value="Private">Private</option>
                     <option class="form-control" value="Public">Public</option>
+                    <option class="form-control" value="Private">Private</option>
                 </select>
             </div>
             <div class="modal-footer">

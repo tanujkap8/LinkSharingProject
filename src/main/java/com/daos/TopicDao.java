@@ -7,4 +7,5 @@ import com.entities.Topic;
  */
 public interface TopicDao {
     boolean topicsave(Topic topic,String username);
+
 }
