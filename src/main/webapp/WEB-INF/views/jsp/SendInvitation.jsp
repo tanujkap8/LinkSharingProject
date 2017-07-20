@@ -50,8 +50,8 @@
         <h2>Send Invitation</h2>
         <form action="" method="post">
             <div class="form-group">
-                <label for="topicname">Email*</label>
-                <input type="text" class="form-control" id="topicname" name="topicname" placeholder="TOPIC NAME">
+                <label for="email">Email*</label>
+                <input type="text" class="form-control" id="email" name="email" placeholder="Email">
             </div>
             <div class="form-group">
                 <label for="topic">Topic*</label>

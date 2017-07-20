@@ -20,7 +20,7 @@ public class Topic {
     @Temporal(TemporalType.DATE)
     private Date lastUpdated = new Date();
 
-    enum Visibility {
+    public enum Visibility {
         Private("Private"), Public("Public");
         String value;
 

@@ -79,8 +79,7 @@ public class UserDaoImpl implements UserDao {
         query.setParameter("password", password);
         query.setParameter("email", email);
         query.executeUpdate();
-        //System.out.println("working 1");
-
+        System.out.println("DELETING NOW...");
         query = session.createQuery("delete from OTPMapping where email=:email");
         query.setParameter("email",email);
         query.executeUpdate();

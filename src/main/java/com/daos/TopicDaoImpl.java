@@ -10,6 +10,9 @@ import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import java.beans.Visibility;
+import java.util.List;
+
 /**
  * Created by tanuj on 7/17/17.
  */
@@ -18,6 +21,8 @@ public class TopicDaoImpl implements TopicDao {
 
     @Autowired
     SubscriptionService subscriptionService;
+
+
 
     private SessionFactory sessionFactory = new Configuration().configure().buildSessionFactory();
 
@@ -34,5 +39,26 @@ public class TopicDaoImpl implements TopicDao {
         session.close();
         subscriptionService.subscribe(user,topic,"VerySerious");
         return true;
+    }
+    public Topic findTopicByname(String name){
+        Session session = sessionFactory.openSession();
+        Query query= session.createQuery("from Topic where name=:name");
+        //System.out.println(query);
+        query.setParameter("name", name);
+        Topic topic = (Topic) query.uniqueResult();
+        session.close();
+        return topic;
+    }
+
+    public List<Topic> getAllPublicTopics(String query){
+        Topic topic = new Topic();
+        Topic.Visibility visibility = Topic.Visibility.valueOf("PUBLIC");
+        Session session = sessionFactory.openSession();
+        Query query1= session.createQuery("SELECT name from Topic where name like :name and visibility= :visibility");
+        query1.setParameter("name",query+"%");
+        query1.setParameter("visibility",visibility);
+        List<Topic> topicsList = query1.list();
+        session.close();
+        return topicsList;
     }
 }

@@ -20,7 +20,7 @@
                         <p>Please provide us your Email Address. We are here to help you</p>
                         <div class="panel-body">
 
-                            <form id="register-form" action="" role="form" autocomplete="off" class="form"
+                            <form id="emailform" action="/sendOTP" role="form" autocomplete="off" class="form"
                                   method="post">
 
                                 <div class="form-group">
@@ -33,10 +33,9 @@
                                     </div>
                                 </div>
                                 <div class="form-group">
-                                    <input name="recover-submit" class="btn btn-lg btn-primary btn-block"
-                                           value="Reset Password" type="submit">
+                                    <input id="#sendOTP" name="recover-submit" class="btn btn-lg btn-primary btn-block"
+                                           value="Send OTP" type="submit">
                                 </div>
-                                <input type="hidden" class="hide" name="token" id="token" value="">
                             </form>
                         </div>
                     </div>

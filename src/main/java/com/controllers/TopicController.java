@@ -7,13 +7,11 @@ import com.services.TopicService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.List;
 
 /**
  * Created by tanuj on 7/15/17.
@@ -30,6 +28,14 @@ public class TopicController {
         topicService.topicsave(topic,request);
         model.setViewName("UserHome");
         return model;
+    }
+
+
+    @RequestMapping(value="/getTags", method = RequestMethod.POST)
+    public @ResponseBody List<Topic> getPublicTopics(@RequestParam("term") String query){
+        System.out.println("on controller"+query);
+        List<Topic> tags = topicService.getTopicList(query);
+        return tags;
     }
 
 }

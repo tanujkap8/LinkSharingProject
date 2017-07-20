@@ -48,7 +48,7 @@
     <div class="modal-content" style="background: lightgray">
         <span class="close3">&times;</span>
         <h2>Share Document</h2>
-        <form action="" method="post">
+        <form action="/createDocumentResource" method="post">
             <div class="form-group">
                 <label for="documentname">Document*</label>
                 <input class="btn btn-default form-control" class="form-control" name="documentname" type="file" id="documentname" value="Browse">

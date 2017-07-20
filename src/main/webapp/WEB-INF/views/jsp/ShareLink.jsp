@@ -44,6 +44,28 @@
             cursor: pointer;
         }
     </style>
+    <script>
+        $(document).ready(function () {
+            function shareLink() {
+                var linkUrl = $("#linkUrl").val();
+                var description = $("#description").val();
+                var topic = $("#topic").val();
+                $.ajax({
+                    type: "POST",
+                    url: "createLinkResource",
+                    data: {linkUrl: linkUrl, description:description,topic:topic},
+                    success: function (response) {
+                        console.log("response", response);
+                        alert("data saved");
+                    },
+                    error: function (r) {
+                        console.log(r);
+                    }
+                });
+            }
+            jQuery(document).on("click", "#sharelink", shareLink);
+        });
+    </script>
 </head>
 <body>
 <button  class="btn btn-primary" id="myBtn2"><span class="glyphicon glyphicon-link"></span></button>
@@ -51,10 +73,10 @@
     <div class="modal-content" style="background: lightgray">
         <span class="close2">&times;</span>
         <h2>Share Link</h2>
-        <form action="" method="post">
+        <form action="javascript:void(0)" method="post">
             <div class="form-group">
-                <label for="topicname">Link*</label>
-                <input type="text" class="form-control" id="topicname" name="topicname" placeholder="TOPIC NAME">
+                <label for="linkUrl">Link*</label>
+                <input type="text" class="form-control" id="linkUrl" name="linkUrl" placeholder="Link">
             </div>
             <div class="form-group">
                 <label for="description">Description*</label>
@@ -63,13 +85,13 @@
             <div class="form-group">
                 <label for="topic">Topic*</label>
                 <select style="float:left" id="topic" class="form-control">
-                    <option class="form-control"></option>
+                    <option class="form-control">C</option>
                 </select>
             </div>
             <div class="modal-footer">
                 <div class="checkbox">
                     <button type="submit" class="btn btn-primary" style="float:right ">Cancel</button>
-                    <button type="submit" class="btn btn-primary" style="float:right ;margin-right:40px">Share</button>
+                    <button type="submit" id="sharelink" class="btn btn-primary" style="float:right ;margin-right:40px">Share</button>
                 </div>
             </div>
         </form>
